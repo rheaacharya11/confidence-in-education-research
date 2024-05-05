@@ -12,7 +12,7 @@
 	set more off
 	pause on
 	
-	global dir "/Users/rheaacharya/Desktop/Spring 2024/Econ 980b/FINAL PSID"
+	global dir "/Users/rheaacharya/Desktop/Spring 2024/Econ 980b/econ980b/FINAL PSID"
 	
 	use "$dir/data/psid_dataset.dta"
 	
@@ -39,21 +39,30 @@
 	rename TA170814 college_gpa
 	rename TA170462 wages
 	rename Q24APPR app_prob_rank
+	rename Q24BRPR reading_rank
+	rename Q21B16 gifted
+	rename Q23E2 math_compared
+	rename Q23E12 reading_compared
 	
 /* Take out NA values */
+	replace gifted = . if gifted == 9 | gifted == 0
 	replace race = . if race == 0 | race > 6
 	replace sex = 0 if sex == 1
 	replace sex = 1 if sex == 2
+	replace reading_rank = . if reading_rank == 999
 	replace college_gpa = . if college_gpa > 12 | college_gpa == 0
 	replace app_prob_rank = . if app_prob_rank == 999
 	replace math_sat = . if math_sat < 200 | math_sat > 800
+	replace reading_sat = . if reading_sat < 200 | reading_sat > 800
 	replace how_good_at_math = . if how_good_at_math < 1 | how_good_at_math > 7
 	replace math_compared = . if math_compared < 1 | math_compared > 7
+	replace reading_compared = . if reading_compared < 1 | reading_compared > 7
 	replace app_prob_rank = . if app_prob_rank < 0 | app_prob_rank > 99
 	
 	
 /* Make new variables */
 	gen log_wages = log(wages)
+	gen total_sat = math_sat + reading_sat
 	
 /* Fun little histograms */
 	histogram race
@@ -65,9 +74,13 @@
 	tabulate race
 	tabulate sex
 	tabulate app_prob_rank
+	tabulate gifted
+	tabulate math_compared
+	tabulate reading_compared
 	
 	
 /* Basic regressions to check if everything is working */	
+	regress reading_sat reading_rank
 	regress math_sat app_prob_rank
 	regress math_sat app_prob_rank sex race
 	regress wages app_prob_rank
@@ -102,7 +115,47 @@
 *************************************************
 * Calculate Confidence Gaps
 *************************************************	
-/* New variables */
+
+/* Discrete metrics
+
+ In particular, we classify any respondent as under-confident in math if she scored above the 75th percentile nationally and ranked her own ability at 1 to 4, corresponding to the bottom 47 percent of the subjective-ability distribution in our sample, or if she scored above the 50th percentile nationally and ranked herself at 1 to 3, corresponding to the bottom 10 percent of the subjective-ability distribution. We define over- confidence among low-achievers using similar thresholds, but we account for the skewed self- assessment distribution by using stricter cut-offs to identify biased beliefs. In particular, we identify any respondent as over-confident in math if she scored below the 25th percentile nationally and rated her own ability at 6 or 7, corresponding to the top 39 percent of the subjective-ability distribution in our sample, or if she scored below the 50th percentile and rated herself at 7, corresponding to the top 22 percent of the subjective-ability distribution. */
+ 
+ gen discrete_conf_math = .
+ * underconfidence = 0
+ replace discrete_conf_math = 0 if (app_prob_rank > 75) & (math_compared >= 1 & math_compared <= 4)
+ replace discrete_conf_math = 0 if (app_prob_rank > 50) & (math_compared >= 1 & math_compared <= 3)
+ * overconfidence = 1
+ replace discrete_conf_math = 1 if (app_prob_rank < 25) & (math_compared == 6 | math_compared == 7)
+ replace discrete_conf_math = 1 if (app_prob_rank < 50) & (math_compared == 7)
+ 
+ drop discrete_conf_reading
+ gen discrete_conf_reading = .
+ * underconfidence = 0
+ replace discrete_conf_reading = 0 if (reading_rank > 75) & (reading_compared >= 1 & reading_compared <= 4)
+ replace discrete_conf_reading = 0 if (reading_rank > 50) & (reading_compared >= 1 & reading_compared <= 3)
+ * overconfidence = 1
+ replace discrete_conf_reading = 1 if (reading_rank < 25) & (reading_compared == 6 | reading_compared == 7)
+ replace discrete_conf_reading = 1 if (reading_rank < 50) & (reading_compared == 7)
+ 
+ summarize discrete_conf_reading
+ summarize reading_rank
+ 
+ bysort sex: summarize discrete_conf_reading, detail
+ 
+// Calculate mean and standard deviation of 'discrete_conf_math' by 'sex'
+by sex, sort: egen mean_conf_math = mean(discrete_conf_math)
+by sex, sort: egen sd_conf_math = sd(discrete_conf_math)
+
+// Display the results
+list
+
+summarize sex if app_prob_rank >= 1 & app_prob_rank <= 99
+
+bysort sex: summarize discrete_conf_math, detail
+
+gen scaled_math_comp = math_compared * 100/7
+
+/* New variables 
 	summarize math_compared
 	histogram math_compared
 	drop std_mathcompared
@@ -131,11 +184,34 @@ summarize gap1
 histogram gap1
 summarize app_prob_rank
 summarize pct_math_compared
-histogram pct_math_compared
+histogram pct_math_compared */
 
 *************************************************
 * Regressions
 *************************************************	
+regress income sex
+
+gen gap1 = scaled_math_comp - app_prob_rank
+histogram gap1
+
+gen indicator = gap1 * sex
+regress log_wages gap1 indicator sex app_prob_rank
+
+regress log_wages sex
+regress wages sex
+
+replace wages = . if wages >= 9999998
+
+
+regress log_wages sex discrete_conf_math discrete_conf_reading reading_rank app_prob_rank
+
+regress log_wages discrete_conf_math
+regress log_wages discrete_conf_math i.discrete_conf_math#sex app_prob_rank sex
+
+
+summarize wages
+histogram wages
+histogram log_wages
 reg log_income sex
 reg log_income gap1
 summarize sex
@@ -143,7 +219,7 @@ drop new_i
 drop new_i2
 gen new_i = gap1 * sex
 gen new_i2 = sex * app_prob_rank
-reg log_income sex gap1 app_prob_rank new_i new_i2
+reg log_wages sex gap1 app_prob_rank new_i new_i2
 
 summarize log_earn_13
 histogram log_earn_13
