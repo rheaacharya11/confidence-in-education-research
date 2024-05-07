@@ -43,6 +43,7 @@
 	rename Q21B16 gifted
 	rename Q23E2 math_compared
 	rename Q23E12 reading_compared
+	rename Q23E1 how_good_at_math
 	
 /* Take out NA values */
 	replace gifted = . if gifted == 9 | gifted == 0
@@ -90,6 +91,20 @@
 	regress math_sat sex
 	
 	histogram math_sat
+	
+	graph box app_prob_rank, over(math_compared) ///
+	 title("Box plot of demonstrated versus perceived comparative ability"),
+	 xlabel ("How good at math are you compared to your peers")
+	 
+	 	graph box app_prob_rank, over(how_good_at_math) ///
+	 title("Box plot of demonstrated versus self-assessed ability"),
+	 xlabel ("How good at math are you compared to your peers")
+	
+	
+	graph hbox app_prob_rank, over(sex) over(math_compared) asyvars
+	
+		graph hbox app_prob_rank, over(sex) over(how_good_at_math) asyvars
+	
 	
 
 	/*rename Q3C1 how_good_at_math 

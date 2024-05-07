@@ -20,6 +20,14 @@ label define CHRELL  ///
        3 "Release number 3 - March 2006"  ///
        4 "Release number 4 - November 2015"
 
+label define DEMREL02L  ///
+       1 "Release number 1 - August 2004"  ///
+       2 "Release number 2 - February 2005"  ///
+       3 "Release number 3 - October 2005"  ///
+       4 "Release number 4 - March 2006"  ///
+       5 "Release number 5 - June 2013"  ///
+       6 "Release number 6 - November 2015"
+
 label define EMSRELL  ///
        1 "Release number 1 - June 2004"  ///
        2 "Release number 2 - May 2013"  ///
@@ -170,6 +178,13 @@ label define Q21B16L  ///
        9 "NA; refused"  ///
        0 "Inap.: if (Q21B4=5 and Q21IwAge<7)"
 
+label define Q21B17L  ///
+       1 "Yes"  ///
+       5 "No"  ///
+       8 "DK"  ///
+       9 "NA; refused"  ///
+       0 "Inap.: if (Q21B4=5) or (Q21B6=14,15,98,99)"
+
 label define Q21K17L  ///
        1 "Never"  ///
        2 "Once"  ///
@@ -229,6 +244,16 @@ label define Q23J1L  ///
       98 "DK"  ///
       99 "NA; refused"  ///
        0 "Inap.: if not eligible for Section J (Age=8-11 yrs old)"
+
+label define Q23J34EL  ///
+       1 "No chance"  ///
+       2 "Some chance"  ///
+       3 "About 50-50"  ///
+       4 "Pretty likely"  ///
+       5 "It will happen"  ///
+       8 "DK"  ///
+       9 "NA; refused"  ///
+       0 "Inap.: if Not eligible for Section J (Age=8-11 yrs old)"
 
 label define Q23K27L  ///
        1 "Never"  ///
@@ -812,6 +837,7 @@ label define TA171990L  ///
 label values ASMREL     ASMRELL
 label values CHLDREL    CHLDRELL
 label values CHREL      CHRELL
+label values DEMREL02   DEMREL02L
 label values EMSREL     EMSRELL
 label values ER30000    ER30000L
 label values ER31996    ER31996L
@@ -824,6 +850,7 @@ label values ER34503    ER34503L
 label values ER66001    ER66001L
 label values Q21B14     Q21B14L
 label values Q21B16     Q21B16L
+label values Q21B17     Q21B17L
 label values Q21K17     Q21K17L
 label values Q23E1      Q23E1L
 label values Q23E10     Q23E10L
@@ -834,6 +861,7 @@ label values Q23E2      Q23E2L
 label values Q23E20     Q23E20L
 label values Q23E3      Q23E3L
 label values Q23J1      Q23J1L
+label values Q23J34E    Q23J34EL
 label values Q23K27     Q23K27L
 label values Q23K29     Q23K29L
 label values Q23K30     Q23K30L

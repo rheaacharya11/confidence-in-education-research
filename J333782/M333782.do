@@ -1,12 +1,12 @@
 #delimit ;
 *  PSID DATA CENTER *****************************************************
-   JOBID            : 333750                            
+   JOBID            : 333782                            
    OUTPUT_DATA_TYPE : ASCII                             
    STATEMENTS       : do                                
    N_OF_VARIABLES   : 101                               
    N_OF_OBSERVATIONS: 19686                             
    MAX_REC_LENGTH   : 259                               
-   DATE & TIME      : May 5, 2024 @ 12:13:32
+   DATE & TIME      : May 6, 2024 @ 20:46:48
 *************************************************************************
 ;
 
@@ -45,7 +45,7 @@ infix
       CRPCGFID21         246 - 250         CRPCGSN21          251 - 252         CDSPCGSN21         253 - 254   
       PCGHHNO21          255 - 255         DEMOG_21           256 - 256         PCGHH_21           257 - 257   
       PCGCH_21           258 - 258         CHILD_21           259 - 259   
-using [path]\M333750.txt, clear 
+using [path]\M333782.txt, clear 
 ;
 label variable CDSCUMREL       "RELEASE NUMBER"                           ;
 label variable CDSCUMID68      "1968 INTERVIEW NUMBER"                    ;

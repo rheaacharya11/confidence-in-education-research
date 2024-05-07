@@ -1,16 +1,16 @@
 #delimit ;
 *  PSID DATA CENTER *****************************************************
-   JOBID            : 333750                            
+   JOBID            : 333782                            
    DATA_DOMAIN      : TAi                               
    USER_WHERE       : NULL                              
    FILE_TYPE        : CDS Kids Only                     
    OUTPUT_DATA_TYPE : ASCII                             
    STATEMENTS       : do                                
    CODEBOOK_TYPE    : PDF                               
-   N_OF_VARIABLES   : 124                               
+   N_OF_VARIABLES   : 130                               
    N_OF_OBSERVATIONS: 4138                              
-   MAX_REC_LENGTH   : 210                               
-   DATE & TIME      : May 5, 2024 @ 12:13:32
+   MAX_REC_LENGTH   : 225                               
+   DATE & TIME      : May 6, 2024 @ 20:46:48
 *************************************************************************
 ;
 
@@ -19,45 +19,47 @@ infix
       TAS17                6 - 6           ER30000              7 - 7           ER30001              8 - 11    
       ER30002             12 - 14          ER31996             15 - 16          ER31997             17 - 17    
       ER32000             18 - 18          ER33601             19 - 22          ER33602             23 - 24    
-      ER33603             25 - 26          CHREL               27 - 27          Q21B14              28 - 28    
-      Q21B16              29 - 29          Q21K17              30 - 30          CHLDREL             31 - 31    
-      Q23E1               32 - 32          Q23E2               33 - 33          Q23E3               34 - 34    
-      Q23E10              35 - 35          Q23E11              36 - 36          Q23E12              37 - 37    
-      Q23E13              38 - 38          Q23E20              39 - 39          Q23J1               40 - 41    
-      Q23K27              42 - 42          Q23K29              43 - 43          Q23K30              44 - 44    
-      Q23K31              45 - 45          MATH02              46 - 49          READ02              50 - 53    
-      EMSREL              54 - 54          Q29A9               55 - 55          Q29A10              56 - 56    
-      Q29A11              57 - 57          ASMREL              58 - 58          Q24BRSS             59 - 61    
-      Q24APRAW            62 - 63          Q24APSS             64 - 66          Q24BRPR             67 - 69    
-      Q24BRW              70 - 72          Q24APPR             73 - 75          Q24APW              76 - 78    
-      ER66001             79 - 79          ER71570             80 - 86          ER34501             87 - 91    
-      ER34502             92 - 93          ER34503             94 - 95     long ER34651             96 - 100   
-      TA170001           101 - 101         TA170002           102 - 106         TA170003           107 - 111   
-      TA170004           112 - 113         TA170015           114 - 114         TA170016           115 - 115   
-      TA170036           116 - 116         TA170037           117 - 117         TA170075           118 - 118   
-      TA170076           119 - 119         TA170077           120 - 120         TA170080           121 - 121   
-      TA170089           122 - 122         TA170090           123 - 123         TA170091           124 - 124   
-      TA170092           125 - 125         TA170093           126 - 126         TA170204           127 - 130   
-      TA170205           131 - 134         TA170389           135 - 135         TA170456           136 - 138   
- long TA170462           139 - 145         TA170463           146 - 146         TA170777           147 - 147   
-      TA170779           148 - 148         TA170781           149 - 149         TA170785           150 - 150   
-      TA170787           151 - 153         TA170788           154 - 156         TA170789           157 - 158   
-      TA170790           159 - 159         TA170791           160 - 160         TA170792           161 - 162   
-      TA170802           163 - 165         TA170808           166 - 167         TA170814           168 - 172   
-      TA170905           173 - 173         TA170907           174 - 174         TA170908           175 - 175   
-      TA170909           176 - 176         TA170910           177 - 177         TA170911           178 - 178   
-      TA170912           179 - 179         TA170913           180 - 180         TA170914           181 - 181   
-      TA170915           182 - 182         TA170916           183 - 183         TA170917           184 - 184   
-      TA171688           185 - 185         TA171715           186 - 186         TA171828           187 - 187   
-      TA171836           188 - 188         TA171841           189 - 189         TA171846           190 - 190   
-      TA171854           191 - 191         TA171862           192 - 192         TA171870           193 - 193   
-      TA171878           194 - 194         TA171886           195 - 195         TA171894           196 - 196   
-      TA171899           197 - 197         TA171921           198 - 198         TA171922           199 - 199   
-      TA171923           200 - 200         TA171924           201 - 201         TA171925           202 - 202   
-      TA171926           203 - 203         TA171927           204 - 204         TA171928           205 - 205   
-      TA171932           206 - 206         TA171935           207 - 207         TA171936           208 - 208   
-      TA171990           209 - 210   
-using "/Users/rheaacharya/Desktop/Spring 2024/Econ 980b/FINAL PSID/J333750.txt", clear 
+      ER33603             25 - 26          ER33604             27 - 29          DEMREL02            30 - 30    
+      CH02PRWT            31 - 36          CHREL               37 - 37          Q21B14              38 - 38    
+      Q21B16              39 - 39          Q21B17              40 - 40          Q21K17              41 - 41    
+      CHLDREL             42 - 42          Q23E1               43 - 43          Q23E2               44 - 44    
+      Q23E3               45 - 45          Q23E10              46 - 46          Q23E11              47 - 47    
+      Q23E12              48 - 48          Q23E13              49 - 49          Q23E20              50 - 50    
+      Q23J1               51 - 52          Q23J34E             53 - 53          Q23K27              54 - 54    
+      Q23K29              55 - 55          Q23K30              56 - 56          Q23K31              57 - 57    
+      MATH02              58 - 61          READ02              62 - 65          EMSREL              66 - 66    
+      Q29A9               67 - 67          Q29A10              68 - 68          Q29A11              69 - 69    
+      ASMREL              70 - 70          Q24BRSS             71 - 73          Q24APRAW            74 - 75    
+      Q24APSS             76 - 78          Q24BRPR             79 - 81          Q24BRW              82 - 84    
+      Q24APPR             85 - 87          Q24APW              88 - 90          ER66001             91 - 91    
+      ER71570             92 - 98          ER34501             99 - 103         ER34502            104 - 105   
+      ER34503            106 - 107         ER34504            108 - 110    long ER34651            111 - 115   
+      TA170001           116 - 116         TA170002           117 - 121         TA170003           122 - 126   
+      TA170004           127 - 128         TA170015           129 - 129         TA170016           130 - 130   
+      TA170036           131 - 131         TA170037           132 - 132         TA170075           133 - 133   
+      TA170076           134 - 134         TA170077           135 - 135         TA170080           136 - 136   
+      TA170089           137 - 137         TA170090           138 - 138         TA170091           139 - 139   
+      TA170092           140 - 140         TA170093           141 - 141         TA170204           142 - 145   
+      TA170205           146 - 149         TA170389           150 - 150         TA170456           151 - 153   
+ long TA170462           154 - 160         TA170463           161 - 161         TA170777           162 - 162   
+      TA170779           163 - 163         TA170781           164 - 164         TA170785           165 - 165   
+      TA170787           166 - 168         TA170788           169 - 171         TA170789           172 - 173   
+      TA170790           174 - 174         TA170791           175 - 175         TA170792           176 - 177   
+      TA170802           178 - 180         TA170808           181 - 182         TA170814           183 - 187   
+      TA170905           188 - 188         TA170907           189 - 189         TA170908           190 - 190   
+      TA170909           191 - 191         TA170910           192 - 192         TA170911           193 - 193   
+      TA170912           194 - 194         TA170913           195 - 195         TA170914           196 - 196   
+      TA170915           197 - 197         TA170916           198 - 198         TA170917           199 - 199   
+      TA171688           200 - 200         TA171715           201 - 201         TA171828           202 - 202   
+      TA171836           203 - 203         TA171841           204 - 204         TA171846           205 - 205   
+      TA171854           206 - 206         TA171862           207 - 207         TA171870           208 - 208   
+      TA171878           209 - 209         TA171886           210 - 210         TA171894           211 - 211   
+      TA171899           212 - 212         TA171921           213 - 213         TA171922           214 - 214   
+      TA171923           215 - 215         TA171924           216 - 216         TA171925           217 - 217   
+      TA171926           218 - 218         TA171927           219 - 219         TA171928           220 - 220   
+      TA171932           221 - 221         TA171935           222 - 222         TA171936           223 - 223   
+      TA171990           224 - 225   
+using "/Users/rheaacharya/Desktop/Spring 2024/Econ 980b/econ980b/J333782/J333782.txt", clear 
 ;
 label variable KIDS            "Sum of All KID Flags"                     ;
 label variable TAS             "Sum of All TAS Flags"                     ;
@@ -72,9 +74,13 @@ label variable ER32000         "SEX OF INDIVIDUAL"                        ;
 label variable ER33601         "2001 INTERVIEW NUMBER"                    ;
 label variable ER33602         "SEQUENCE NUMBER                       01" ;
 label variable ER33603         "RELATION TO HEAD                      01" ;
+label variable ER33604         "AGE OF INDIVIDUAL                     01" ;
+label variable DEMREL02        "DEMOG FILE RELEASE NUMBER 02"             ;
+label variable CH02PRWT        "CHILD LEVEL WEIGHT 02"                    ;
 label variable CHREL           "PCG CHILD FILE RELEASE NUMBER 02"         ;
 label variable Q21B14          "TYPE ATTEND 02"                           ;
 label variable Q21B16          "EVER IN GIFTED PROG 02"                   ;
+label variable Q21B17          "EVER IN SPEC EDUC 02"                     ;
 label variable Q21K17          "DEMONSTRATE ACHIEVEMENT 02"               ;
 label variable CHLDREL         "CHILD FILE RELEASE NUMBER 02"             ;
 label variable Q23E1           "MATH SKILL GEN RATE 02"                   ;
@@ -86,6 +92,7 @@ label variable Q23E12          "READING SKILL IN CONTEXT PEERS 02"        ;
 label variable Q23E13          "READING COMPARED T0 OTH SKILLS 02"        ;
 label variable Q23E20          "HOW MUCH LIKE READING 02"                 ;
 label variable Q23J1           "RACE/ETHNICITY 02"                        ;
+label variable Q23J34E         "FAMILY INCOME 02"                         ;
 label variable Q23K27          "PROUD 02"                                 ;
 label variable Q23K29          "GOOD THINGS ABOUT ME 02"                  ;
 label variable Q23K30          "GOOD AS OTHERS 02"                        ;
@@ -109,6 +116,7 @@ label variable ER71570         "2017 CORE/IMMIGRANT FAM WEIGHT NUMBER 1"  ;
 label variable ER34501         "2017 INTERVIEW NUMBER"                    ;
 label variable ER34502         "SEQUENCE NUMBER                       17" ;
 label variable ER34503         "RELATION TO REFERENCE PERSON          17" ;
+label variable ER34504         "AGE OF INDIVIDUAL                     17" ;
 label variable ER34651         "CORE/IMM INDIVIDUAL CROSS-SECTION WT  17" ;
 label variable TA170001        "RELEASE NUMBER"                           ;
 label variable TA170002        "2017 TAS INTERVIEW (ID) NUMBER"           ;
