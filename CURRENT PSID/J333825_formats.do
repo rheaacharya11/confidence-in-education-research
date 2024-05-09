@@ -6,6 +6,10 @@ label define ASMRELL  ///
        4 "Release number 4 - January 2014"  ///
        5 "Release number 5 - May 2019"
 
+label define ASMREL07L  ///
+       1 "Release number 1 - October, 2009"  ///
+       2 "Release number 2 - November, 2010"
+
 label define CHLDRELL  ///
        1 "Release number 1 - July 2004"  ///
        2 "Release number 2 - January 2005"  ///
@@ -13,6 +17,16 @@ label define CHLDRELL  ///
        4 "Release number 4 - June 2010"  ///
        5 "Release number 5 - November 2015"  ///
        6 "Release number 6 - May 2019"
+
+label define CHLDREL97L  ///
+       1 "Release number 1 - May 1999"  ///
+       2 "Release number  2 - March 2006"  ///
+       3 "Release number 3 - January 2014"  ///
+       4 "Release number 4 - May 2019"
+
+label define CHLREL07L  ///
+       1 "Release number 1 - October, 2009"  ///
+       2 "Release number 2 - May, 2019"
 
 label define CHRELL  ///
        1 "Release number 1 - July 2004"  ///
@@ -32,6 +46,11 @@ label define EMSRELL  ///
        1 "Release number 1 - June 2004"  ///
        2 "Release number 2 - May 2013"  ///
        3 "Release number 3 - November 2015"
+
+label define EMSTRL97L  ///
+       1 "Release number 1 - October 1999"  ///
+       2 "Release number 2 - April 2006"  ///
+       3 "Release number 3 - May 2019"
 
 label define ER30000L  ///
        1 "Release number 1, June 2023"  ///
@@ -57,6 +76,55 @@ label define ER32000L  ///
        1 "Male"  ///
        2 "Female"  ///
        9 "NA"
+forvalues n = 1/20 {
+    label define ER33402L `n' "Individuals in the family at the time of the 1997 interview"  , modify
+}
+forvalues n = 51/59 {
+    label define ER33402L `n' "Individuals in institutions at the time of the 1997 interview"  , modify
+}
+forvalues n = 71/80 {
+    label define ER33402L `n' "Individuals who moved out of the FU or out of institutions and established their own households between the 1996 and 1997 interviews"  , modify
+}
+forvalues n = 81/89 {
+    label define ER33402L `n' "Individuals who were living in 1996 but died by the time of the 1997 interview"  , modify
+}
+label define ER33402L        0 "Inap.:  born or moved in after the 1997 interview; from Immigrant or Latino samples (ER30001=3001-3511,4001-4851,7001-9308); main family nonresponse by 1997 or mover-out nonresponse by 1996 (ER33401=0)"  , modify
+
+label define ER33403L  ///
+      10 "Head in 1997; 1996 Head who was mover-out nonresponse by the time of the 1997 interview"  ///
+      20 "Legal Wife in 1997; 1996 Wife who was mover-out nonresponse by the time of the 1997 interview"  ///
+      22 `""Wife"--female cohabitor who has lived with Head for 12 months or more or who was present in the 1996 family, since consecutive interviews may be taken less or more than twelve months apart; 1996 "Wife" who was mover-out nonresponse by the time of the 1997 interview"'  ///
+      30 "Son or daughter of Head (includes adopted children but not stepchildren)"  ///
+      33 "Stepson or stepdaughter of Head (children of legal Wife (code 20) who are not children of Head)"  ///
+      35 `"Son or daughter of "Wife" but not Head (includes only those children of mothers whose relationship to Head is 22 but who are not children of Head)"'  ///
+      37 "Son-in-law or daughter-in-law of Head (includes stepchildren-in-law)"  ///
+      38 "Foster son or foster daughter, not legally adopted"  ///
+      40 "Brother or sister of Head (includes step and half sisters and brothers)"  ///
+      47 "Brother-in-law or sister-in-law of Head; i.e., brother or sister of legal Wife, or spouse of Head`=char(146)'s brother or sister."  ///
+      48 "Brother or sister of Head`=char(146)'s cohabitor (the cohabitor is coded 22 or 88)"  ///
+      50 "Father or mother of Head (includes stepparents)"  ///
+      57 "Father-in-law or mother-in-law of Head (includes parents of legal wives (code 20) only)"  ///
+      58 "Father or mother of Head`=char(146)'s cohabitor (the cohabitor is coded 22 or 88)"  ///
+      60 "Grandson or granddaughter of Head (includes grandchildren of legal Wife (code 20), but those of a cohabitor are coded 97)"  ///
+      65 "Great-grandson or great-granddaughter of Head (includes great-grandchildren of legal Wife (code 20), but those of a cohabitor are coded 97)"  ///
+      66 "Grandfather or grandmother of Head (includes stepgrandparents)"  ///
+      67 "Grandfather or grandmother of legal Wife (code 20)"  ///
+      68 "Great-grandfather or great-grandmother of Head"  ///
+      69 "Great-grandfather or great-grandmother of legal Wife (code 20)"  ///
+      70 "Nephew or niece of Head"  ///
+      71 "Nephew or niece of legal Wife (code 20)"  ///
+      72 "Uncle or Aunt of Head"  ///
+      73 "Uncle or Aunt of legal Wife (code 20)"  ///
+      74 "Cousin of Head"  ///
+      75 "Cousin of legal Wife (code 20)"  ///
+      83 "Children of first-year cohabitor but not of Head (the parent of this child is coded 88)"  ///
+      88 "First-year cohabitor of Head"  ///
+      90 "Legal husband of Head"  ///
+      95 "Other relative of Head"  ///
+      96 "Other relative of legal Wife (code 20)"  ///
+      97 "Other relative of cohabitor (the cohabitor is code 22 or 88)"  ///
+      98 "Other nonrelatives (includes homosexual partners, friends of children of the FU, etc.)"  ///
+       0 "Inap. from Immigrant Sample added in 1999, from Immigrant Sample added in 2017 or Latino samples (ER30001=3442-3511, 4001-4851, 7001-9308); main family nonresponse by 1997 or mover-out nonresponse by 1996 (ER33401=0); born or moved in after the 1997 interview (ER33401>0 and ER33402=0)"
 forvalues n = 1/20 {
     label define ER33602L `n' "Individuals in the family at the time of the 2001 interview"  , modify
 }
@@ -106,6 +174,55 @@ label define ER33603L  ///
       97 "Other relative of cohabitor (the cohabitor is code 22 or 88)"  ///
       98 "Other nonrelatives (includes homosexual partners, friends of children of the FU, etc.)"  ///
        0 "Inap.:  from Latino sample (ER30001=7001-9308); from Immigrant 2017 sample (ER30001=4001-4851); main family nonresponse by 2001 or mover-out nonresponse by 1999 (ER33601=0); born or moved in after the 2001 interview (ER33601>0 and ER33602=0)"
+forvalues n = 1/20 {
+    label define ER33902L `n' "Individuals in the family at the time of the 2007 interview"  , modify
+}
+forvalues n = 51/59 {
+    label define ER33902L `n' "Individuals in institutions at the time of the 2007 interview"  , modify
+}
+forvalues n = 71/80 {
+    label define ER33902L `n' "Individuals who moved out of the FU or out of institutions and established their own households between the 2005 and 2007 interviews"  , modify
+}
+forvalues n = 81/89 {
+    label define ER33902L `n' "Individuals who were living in 2005 but died by the time of the 2007 interview"  , modify
+}
+label define ER33902L        0 "Inap.:  from Latino sample (ER30001=7001-9308); from Immigrant 2017 sample (ER30001=4001-4851); main family nonresponse by 2007 or mover-out nonresponse by 2005 (ER33901=0)"  , modify
+
+label define ER33903L  ///
+      10 "Head in 2007; 2005 Head who was mover-out nonresponse by the time of the 2007 interview"  ///
+      20 "Legal Wife in 2007; 2005 Wife who was mover-out nonresponse by the time of the 2007 interview"  ///
+      22 `""Wife"--female cohabitor who has lived with Head for 12 months or more; 2005 "Wife" who was mover-out nonresponse by the time of the 2007 interview"'  ///
+      30 "Son or daughter of Head (includes adopted children but not stepchildren)"  ///
+      33 "Stepson or stepdaughter of Head (children of legal Wife [code 20] who are not children of Head)"  ///
+      35 `"Son or daughter of "Wife" but not Head (includes only those children of mothers whose relationship to Head is 22 but who are not children of Head)"'  ///
+      37 "Son-in-law or daughter-in-law of Head (includes stepchildren-in-law)"  ///
+      38 "Foster son or foster daughter, not legally adopted"  ///
+      40 "Brother or sister of Head (includes step and half sisters and brothers)"  ///
+      47 "Brother-in-law or sister-in-law of Head; i.e., brother or sister of legal Wife, or spouse of Head`=char(146)'s brother or sister"  ///
+      48 "Brother or sister of Head`=char(146)'s cohabitor (the cohabitor is coded 22 or 88)"  ///
+      50 "Father or mother of Head (includes stepparents)"  ///
+      57 "Father-in-law or mother-in-law of Head (includes parents of legal wives [code 20] only)"  ///
+      58 "Father or mother of Head`=char(146)'s cohabitor (the cohabitor is coded 22 or 88)"  ///
+      60 "Grandson or granddaughter of Head (includes grandchildren of legal Wife [code 20] only; those of a cohabitor are coded 97)"  ///
+      65 "Great-grandson or great-granddaughter of Head (includes great-grandchildren of legal Wife [code 20]; those of a cohabitor are coded 97)"  ///
+      66 "Grandfather or grandmother of Head (includes stepgrandparents)"  ///
+      67 "Grandfather or grandmother of legal Wife (code 20)"  ///
+      68 "Great-grandfather or great-grandmother of Head"  ///
+      69 "Great-grandfather or great-grandmother of legal Wife (code 20)"  ///
+      70 "Nephew or niece of Head"  ///
+      71 "Nephew or niece of legal Wife (code 20)"  ///
+      72 "Uncle or Aunt of Head"  ///
+      73 "Uncle or Aunt of legal Wife (code 20)"  ///
+      74 "Cousin of Head"  ///
+      75 "Cousin of legal Wife (code 20)"  ///
+      83 "Children of first-year cohabitor but not of Head (the parent of this child is coded 88)"  ///
+      88 "First-year cohabitor of Head"  ///
+      90 "Legal husband of Head"  ///
+      95 "Other relative of Head"  ///
+      96 "Other relative of legal Wife (code 20)"  ///
+      97 "Other relative of cohabitor (the cohabitor is code 22 or 88)"  ///
+      98 "Other nonrelatives (includes homosexual partners, friends of children of the FU, etc.)"  ///
+       0 "Inap.:  from Latino sample (ER30001=7001-9308); from Immigrant 2017 sample (ER30001=4001-4851); main family nonresponse by 2007 or mover-out nonresponse by 2005 (ER33901=0)"
 forvalues n = 1/20 {
     label define ER34502L `n' "Individuals in the family at the time of the 2017 interview"  , modify
 }
@@ -315,6 +432,110 @@ label define Q29A9L  ///
        3 "Below average"  ///
        8 "DK"  ///
        9 "NA; refused"
+forvalues n = 1/7 {
+    label define Q33E1L `n' "Not at all good (1) - OK (4) - Very good (7)"  , modify
+}
+label define Q33E1L        8 "DK"  , modify
+label define Q33E1L        9 "NA; refused"  , modify
+forvalues n = 1/7 {
+    label define Q33E11L `n' "Not at all good (1) - OK (4) - Very good (7)"  , modify
+}
+label define Q33E11L        8 "DK"  , modify
+label define Q33E11L        9 "NA; refused"  , modify
+forvalues n = 1/7 {
+    label define Q33E12L `n' "One of the worst (1) - In the middle (4) - The best (7)"  , modify
+}
+label define Q33E12L        8 "DK"  , modify
+label define Q33E12L        9 "NA; refused"  , modify
+forvalues n = 1/7 {
+    label define Q33E2L `n' "One of the worst (1) - In the middle (4) - The best (7)"  , modify
+}
+label define Q33E2L        8 "DK"  , modify
+label define Q33E2L        9 "NA; refused"  , modify
+forvalues n = 1/7 {
+    label define Q33E3L `n' "A lot worse in math than in other subjects (1) - About the same (4) - A lot better in math than in other subjects (7)"  , modify
+}
+label define Q33E3L        8 "DK"  , modify
+label define Q33E3L        9 "NA; refused"  , modify
+forvalues n = 0/60 {
+    label define Q34APRAWL `n' "Actual score"  , modify
+}
+label define Q34APRAWL       99 "NA; Applied Problems not administered"  , modify
+forvalues n = 0/53 {
+    label define Q3APRAWL `n' "ACTUAL SCORE"  , modify
+}
+label define Q3APRAWL       99 "NOT ASCERTAINED"  , modify
+
+label define Q3C1L  ///
+       1 "NOT AT ALL GOOD"  ///
+       2 "No code text"  ///
+       3 "No code text"  ///
+       4 "O.K."  ///
+       5 "No code text"  ///
+       6 "No code text"  ///
+       7 "VERY GOOD"  ///
+       8 "DK"  ///
+       9 "NA/REFUSED"  ///
+       0 "Inap.: Q3C0 NE 1"
+
+label define Q3C11L  ///
+       1 "NOT AT ALL GOOD"  ///
+       2 "No code text"  ///
+       3 "No code text"  ///
+       4 "O.K."  ///
+       5 "No code text"  ///
+       6 "No code text"  ///
+       7 "VERY GOOD"  ///
+       8 "DK"  ///
+       9 "NA/REFUSED"  ///
+       0 "Inap.: Q3C0 NE 1"
+
+label define Q3C12L  ///
+       1 "ONE OF THE WORST"  ///
+       2 "No code text"  ///
+       3 "No code text"  ///
+       4 "IN THE MIDDLE"  ///
+       5 "No code text"  ///
+       6 "No code text"  ///
+       7 "THE BEST"  ///
+       8 "DK"  ///
+       9 "NA/REFUSED"  ///
+       0 "Inap.: Q3C0 NE 1"
+
+label define Q3C2L  ///
+       1 "ONE OF THE WORST"  ///
+       2 "No code text"  ///
+       3 "No code text"  ///
+       4 "IN THE MIDDLE"  ///
+       5 "No code text"  ///
+       6 "No code text"  ///
+       7 "THE BEST"  ///
+       8 "DK"  ///
+       9 "NA/REFUSED"  ///
+       0 "Inap.: Q3C0 NE 1"
+
+label define Q3C3L  ///
+       1 "A LOT WORSE IN MATH THAN OTHER SUBJECTS"  ///
+       2 "No code text"  ///
+       3 "No code text"  ///
+       4 "ABOUT THE SAME"  ///
+       5 "No code text"  ///
+       6 "No code text"  ///
+       7 "A LOT BETTER IN MATH THAN OTHER SUBJECTS"  ///
+       8 "DK"  ///
+       9 "NA/REFUSED"  ///
+       0 "Inap.: Q3C0 NE 1"
+forvalues n = 0/46 {
+    label define Q3CALRAWL `n' "ACTUAL SCORE"  , modify
+}
+label define Q3CALRAWL       99 "NOT ASCERTAINED OR Inap.: Q3AGE LT 6"  , modify
+
+label define Q9A16L  ///
+       1 "ABOVE AVERAGE"  ///
+       2 "AVERAGE"  ///
+       3 "BELOW AVERAGE"  ///
+       8 "DK"  ///
+       9 "NA/REFUSED"
 
 label define TA170001L  ///
        1 "Release number 1, August 2019"  ///
@@ -835,16 +1056,24 @@ label define TA171990L  ///
       99 "NA; refused"
 
 label values ASMREL     ASMRELL
+label values ASMREL07   ASMREL07L
 label values CHLDREL    CHLDRELL
+label values CHLDREL97  CHLDREL97L
+label values CHLREL07   CHLREL07L
 label values CHREL      CHRELL
 label values DEMREL02   DEMREL02L
 label values EMSREL     EMSRELL
+label values EMSTRL97   EMSTRL97L
 label values ER30000    ER30000L
 label values ER31996    ER31996L
 label values ER31997    ER31997L
 label values ER32000    ER32000L
+label values ER33402    ER33402L
+label values ER33403    ER33403L
 label values ER33602    ER33602L
 label values ER33603    ER33603L
+label values ER33902    ER33902L
+label values ER33903    ER33903L
 label values ER34502    ER34502L
 label values ER34503    ER34503L
 label values ER66001    ER66001L
@@ -870,6 +1099,20 @@ label values Q24APRAW   Q24APRAWL
 label values Q29A10     Q29A10L
 label values Q29A11     Q29A11L
 label values Q29A9      Q29A9L
+label values Q33E1      Q33E1L
+label values Q33E11     Q33E11L
+label values Q33E12     Q33E12L
+label values Q33E2      Q33E2L
+label values Q33E3      Q33E3L
+label values Q34APRAW   Q34APRAWL
+label values Q3APRAW    Q3APRAWL
+label values Q3C1       Q3C1L
+label values Q3C11      Q3C11L
+label values Q3C12      Q3C12L
+label values Q3C2       Q3C2L
+label values Q3C3       Q3C3L
+label values Q3CALRAW   Q3CALRAWL
+label values Q9A16      Q9A16L
 label values TA170001   TA170001L
 label values TA170004   TA170004L
 label values TA170015   TA170015L
