@@ -52,7 +52,11 @@
 	rename Q34APPR app_prob_rank_07
 	rename Q34BRPR reading_rank_07
 	rename Q23E11 how_good_at_reading
+	rename TA170905 emotional_prob
+	rename TA170802 college_major
 	
+	
+	gen total_sat = reading_sat + math_sat
 	
 	/* NEW ANALYSIS */
 	
@@ -69,6 +73,7 @@
 	replace app_prob_rank = . if app_prob_rank < 0 | app_prob_rank > 99
 	replace wages = . if wages > 9999997
 	replace wages = . if wages == 0
+	replace emotional_prob = . if emotional_prob == 8 | emotional_prob == 9
 	
 	drop if age <= 7
 	
@@ -78,7 +83,10 @@
 	/* basic regression */
 	regress wages sex
 	
+	histogram TA170907
+	replace TA170907 = . if TA170907 == 0
 	
+	replace TA170910 = . if TA170910 == 0
 	/* summarize */
 	
 	summarize math_compared
@@ -190,45 +198,235 @@
 	
 	regress reading_rank_07 reading_rank reading_gap_cont 
 	
+	drop rrgap_under
+	drop i_ru
+	gen rrgap_under = 0
+	replace rrgap_under = abs(reading_gap_cont) if reading_gap_cont < 0
+	gen i_ru = sex * rrgap_under
+	
+	
+	gen rrgap_over = 0
+	replace rrgap_over = reading_gap_cont if reading_gap_cont > 0
+	gen i_rover = sex * rrgap_over
+	
+	drop rrgap_under
+	drop i_mu
+	drop i_mover
+	drop i_rover
+	
+	drop mathgap_under
+	gen mathgap_under = 0
+	replace mathgap_under = abs(math_gap_cont) if math_gap_cont < 0
+	gen i_mu = sex * mathgap_under
+	
+	drop mathgap_over
+	gen mathgap_over = 0
+	replace mathgap_over = math_gap_cont if math_gap_cont > 0
+	gen i_mover = sex * mathgap_over
+	
+	
+	/* EMOTIONAL PROB */
+	histogram emotional_prob
+	replace emotional_prob = 1 if emotional_prob == 5
+	regress emotional_prob reading_rank rrgap_under sex i_ru 
+	regress emotional_prob reading_rank rrgap_over sex i_rover
+	
+	regress emotional_prob app_prob_rank mathgap_under sex i_mu 
+	regress emotional_prob app_prob_rank mathgap_over sex i_mover
+	
+	regress TA170907 reading_rank rrgap_under sex i_ru family_income race school_type gifted
+	regress TA170907 reading_rank rrgap_over sex i_rover family_income race school_type gifted
+	
+	regress TA170907 app_prob_rank mathgap_under sex i_mu family_income race school_type gifted
+	regress TA170907 app_prob_rank mathgap_over sex i_mover family_income race school_type gifted
+	
+	histogram TA170910
+	
+	regress TA170910 reading_rank rrgap_under sex i_ru 
+	regress TA170910 reading_rank rrgap_over sex i_rover
+	
+	regress TA170910 app_prob_rank mathgap_under sex i_mu 
+	regress TA170910 app_prob_rank mathgap_over sex i_mover
+	
+	TA170910
+	TA170907
+	
+	
+	rename TA170790 college_degree
+	replace college_degree = 0.5 if college_degree == 3 | college_degree == 5 | college_degree == 8 | college_degree == 9
+	replace college_degree = 1.5 if college_degree == 1
+	histogram college_degree
+	summarize college_degree if college_degree == 0.5 | college_degree == 1.5
+	
+	regress college_degree reading_rank rrgap_under sex i_ru total_sat [pweight = ER34651]
+	regress college_degree reading_rank rrgap_over sex i_rover total_sat [pweight = ER34651]
+	
+	regress college_degree app_prob_rank mathgap_under sex i_mu total_sat [pweight = ER34651]
+	regress college_degree app_prob_rank mathgap_over sex i_mover total_sat [pweight = ER34651]
+	
+	histogram total_sat
+	
+	histogram age
+	
+	summarize math_sat
+	summarize reading_sat
+	summarize total_sat
+	summarize log_wages
+
+	drop stem_major
+	gen stem_major = missing()
+	replace stem_major = 1 if college_major > 1 & college_major < 997
+	replace stem_major = 2 if college_major >= 21 & college_major <= 57
+	replace stem_major = 2 if college_major == 120 | college_major == 122
+	
+	summarize stem_major if stem_major == 1 | stem_major == 2
+	summarize college_major
+	tabulate college_major
+	
+	summarize rrgap_over if rrgap_over > 0
+	summarize rrgap_under if rrgap_under > 0
+	summarize rrgap_over if rrgap_over > 0 & sex == 0
+	summarize rrgap_under if rrgap_under > 0 &  sex == 0
+	summarize rrgap_under
+	summarize rrgap_over if sex == 0
+	summarize rrgap_under if sex == 0
+	summarize rrgap_over if sex == 0
+	summarize rrgap_over if sex == 1
+	summarize mathgap_over if sex == 0
+	summarize mathgap_over if sex == 1
+	summarize rrgap_under if sex == 0
+	summarize rrgap_under if sex == 1
+	summarize mathgap_under if sex == 0
+	summarize mathgap_under if sex == 1
+	
+	
+	
+	
+	summarize stem_major if mathgap_under == 0
+	summarize stem_major if mathgap_under > 0
+	summarize stem_major if mathgap_over == 0
+	summarize stem_major if mathgap_over > 0
+	
+	summarize math_gap_cont if stem_major == 1
+	summarize math_gap_cont if stem_major == 0
+	summarize math_sat if stem_major == 1
+	summarize math_sat if stem_major == 0
+
+	summarize math_gap_cont if stem_major == 1 & sex == 0
+	summarize math_gap_cont if stem_major == 1 & sex == 1
+	summarize math_gap_cont if stem_major == 0 & sex == 0
+	summarize math_gap_cont if stem_major == 0 & sex == 1
+	
+	summarize math_sat if stem_major == 1 & sex == 0
+	summarize math_sat if stem_major == 1 & sex == 1
+	summarize math_sat if stem_major == 0 & sex == 0
+	summarize math_sat if stem_major == 0 & sex == 1
+	
+	regress stem_major app_prob_rank mathgap_under sex i_mu total_sat
+	regress stem_major app_prob_rank mathgap_over sex i_mover total_sat
+	
 	
 	/* WAGES */
 	gen log_wages = log(wages)
 	regress wages app_prob_rank math_gap_cont sex indicator_mathgap_sex [pweight = ER34651]
 	regress wages reading_rank reading_gap_cont sex indicator_readinggap_sex [pweight = ER34651]
 	
+	eststo clear
+
+	/* actual ones */
+	regress log_wages reading_rank rrgap_under sex i_ru race gifted family_income school_type
+	regress log_wages reading_rank rrgap_over sex i_rover race gifted family_income school_type
+	
+	regress log_wages app_prob_rank mathgap_under sex i_mu race gifted family_income school_type
+	regress log_wages app_prob_rank mathgap_over sex i_mover race gifted family_income school_type
+	
+	
 	regress wages app_prob_rank math_gap_cont sex indicator_mathgap_sex 
+	estimates store W1
 	regress wages reading_rank reading_gap_cont sex indicator_readinggap_sex
+	estimates store W2
+	
+	esttab W1 W2 using "$dir/Tables/wages.tex$", replace booktabs
+		* wrap compress nogap nonotes
+		* se label r2
+		se title("Wages Regression Results") mtitles("Basic Math" "Basic Reading") b(%9.2f) //
+		addnotes("Standard errors in parentheses") //
+		stats(r2 N, labels("R-squared" "Number of obs")) //
+		star(* 0.10 ** 0.05 *** 0.01)
+		
 	
 	regress log_wages app_prob_rank math_gap_cont sex indicator_mathgap_sex 
 	regress log_wages reading_rank reading_gap_cont sex indicator_readinggap_sex 
 	
 	
 	
-	
+	/* HISTOGRAM */
+	histogram math_gap_cont, title("Math Confidence Gaps") ///
+		xtitle("Math Confidence Gap, %") ytitle("Density") color(purple) 
+		
+	histogram reading_gap_cont if sex == 1, title("Reading Confidence Gaps") ///
+		xtitle("Reading Confidence Gap, %") ytitle("Density") color(purple)
+		
+	histogram how_good_at_reading if sex == 1, title("Female Absolute Reading Self-Report") ///
+		xtitle("How good are you at reading?") ytitle("Density") color(red)
+		
+	histogram how_good_at_math if sex == 1, title("Female Absolute Math Self-Report") ///
+		xtitle("How good are you at math?") ytitle("Density") color(red)
 	
 	/* DISCRETE */
 	
-	 gen discrete_conf_math = .
+	 gen over_discrete_conf_math = 0
 	 * underconfidence = 0
-	 replace discrete_conf_math = 0 if (app_prob_rank > 75) & (math_compared >= 1 & math_compared <= 4)
-	 replace discrete_conf_math = 0 if (app_prob_rank > 50) & (math_compared >= 1 & math_compared <= 3)
+	 replace over_discrete_conf_math = 0 if (app_prob_rank > 75) & (how_good_at_math >= 1 & how_good_at_math <= 4)
+	 replace over_discrete_conf_math = 0 if (app_prob_rank > 50) & (how_good_at_math >= 1 & how_good_at_math <= 3)
 	 * overconfidence = 1
-	 replace discrete_conf_math = 1 if (app_prob_rank < 25) & (math_compared == 6 | math_compared == 7)
-	 replace discrete_conf_math = 1 if (app_prob_rank < 50) & (math_compared == 7)
+	 replace over_discrete_conf_math = 1 if (app_prob_rank < 25) & (how_good_at_math == 6 | how_good_at_math == 7)
+	 replace over_discrete_conf_math = 1 if (app_prob_rank < 50) & (how_good_at_math == 7)
 	 
 	 drop discrete_conf_reading
-	 gen discrete_conf_reading = .
+	 gen over_discrete_conf_reading = 0
 	 * underconfidence = 0
-	 replace discrete_conf_reading = 0 if (reading_rank > 75) & (reading_compared >= 1 & reading_compared <= 4)
-	 replace discrete_conf_reading = 0 if (reading_rank > 50) & (reading_compared >= 1 & reading_compared <= 3)
+	 replace over_discrete_conf_reading = 0 if (reading_rank > 75) & (how_good_at_reading >= 1 & reading_compared <= 4)
+	 replace over_discrete_conf_reading = 0 if (reading_rank > 50) & (how_good_at_reading >= 1 & reading_compared <= 3)
 	 * overconfidence = 1
-	 replace discrete_conf_reading = 1 if (reading_rank < 25) & (reading_compared == 6 | reading_compared == 7)
-	 replace discrete_conf_reading = 1 if (reading_rank < 50) & (reading_compared == 7)
- 
+	 replace over_discrete_conf_reading = 1 if (reading_rank < 25) & (how_good_at_reading == 6 | how_good_at_reading == 7)
+	 replace over_discrete_conf_reading = 1 if (reading_rank < 50) & (how_good_at_reading == 7)
+	 
+	 
+	 gen indicator_discrete_math = over_discrete_conf_math * sex
+	 gen indicator_discrete_reading = over_discrete_conf_reading * sex
+	 
+	 * Regressions
+	 regress log_wages over_discrete_conf_math app_prob_rank sex indicator_discrete_math
+	 regress log_wages over_discrete_conf_reading reading_rank sex indicator_discrete_reading
+	 
+	 
+	 regress math_sat over_discrete_conf_math app_prob_rank sex indicator_discrete_math [pweight = ER34651]
+	
+	
+	regress math_sat app_prob_rank mathgap_under sex i_mu 
+	regress math_sat app_prob_rank mathgap_over sex i_mover
+	regress math_sat app_prob_rank mathgap_under sex i_mu family_income race gifted school_type
+	regress math_sat app_prob_rank mathgap_over sex i_mover family_income race gifted school_type
+	
+	regress reading_sat reading_rank rrgap_under sex i_mu 
+	regress reading_sat reading_rank rrgap_over sex i_rover
+	regress reading_sat reading_rank rrgap_under sex i_mu  family_income race gifted school_type
+	regress reading_sat reading_rank rrgap_over i_rover  family_income race gifted school_type
+	
+	
+	
+	regress reading_sat reading_rank rrgap_under sex i_ru 
+	regress reading_sat reading_rank rrgap_over sex i_rover
+	
+	regress math_sat app_prob_rank mathgap_under sex i_mu 
+	regress math_sat app_prob_rank mathgap_over sex i_mover
+	
+	regress total_sat reading_sat reading_rank rrgap_under sex 
+	regress total_sat 
+	
+	
 	/*
-	
-	
-	
 	
 	mean sex [pweight = ER34651]
 	
