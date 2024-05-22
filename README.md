@@ -17,5 +17,8 @@ different outcomes. Namely, greater overconfidence in reading leads to better te
 graduation rates, but worse wages, but this might be related to relative salaries in STEM vs non-STEM
 fields.
 
+### Structure of Repo
+My submitted paper can be found in PDF format, and within the CURRENT PSID folder, I have included my datasets and my empirical analysis files.
+
 _This paper was written for Econ 980B: Education in the Economy, a Harvard junior research seminar
 taught by Professor Lawrence Katz and Professor Claudia Goldin, with Teaching Fellow Fiona Chen._
