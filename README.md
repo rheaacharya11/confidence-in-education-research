@@ -2,8 +2,6 @@
 ### Gendered Effects of Confidence in Early Education on Later Life Outcomes
 Rhea Acharya
 
-May 10, 2024
-
 ### Abstract
 I explore how the impacts of over- and under-confidence o n l ater l ife o utcomes differ
 between genders. Specifically, I look at how over- and under- confidence in academic contexts in primary
